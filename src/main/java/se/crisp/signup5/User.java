@@ -11,7 +11,7 @@ public class User {
   private String email;
   private String phone;
   private String permission;
-  private String password;
+  private String pwd;
   private String imageProvider;
   private String imageVersion;
   private String providerKey;

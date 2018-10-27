@@ -15,33 +15,42 @@ import java.util.List;
 public class MainController {
 
   private final UserMapper userMapper;
+  private final GroupMapper groupMapper;
 
   @Autowired
-  public MainController(UserMapper userMapper) {
+  public MainController(UserMapper userMapper, GroupMapper groupMapper) {
     this.userMapper = userMapper;
+    this.groupMapper = groupMapper;
   }
 
-  @GetMapping(path = "/find")
+  @GetMapping(path = "/user/find")
   public @ResponseBody
   User findUser(@RequestParam String email) {
     return userMapper.findByEmail(email);
   }
 
-  @GetMapping(path = "/all")
+  @GetMapping(path = "/user/all")
   public @ResponseBody
   List<User> getAllUsers() {
     return userMapper.findAll();
   }
 
+  @GetMapping(path = "/group/find")
+  public @ResponseBody
+  Group findGroupByName(@RequestParam String name) {
+    return groupMapper.findByName(name);
+  }
 
-  //  @GetMapping(path = "/add")
-//  public @ResponseBody
-//  String addNewUser(@RequestParam String name, @RequestParam String email) {
-//    User n = new User();
-//    n.setName(name);
-//    n.setEmail(email);
-//    userMapper.save(n);
-//    return "Saved";
-//  }
+  @GetMapping(path = "/group/findByUser")
+  public @ResponseBody
+  List<Group> findGroupByUser(@RequestParam String email) {
+    return groupMapper.findByUser(email);
+  }
+
+  @GetMapping(path = "/group/all")
+  public @ResponseBody
+  List<Group> getAllGroups() {
+    return groupMapper.findAll();
+  }
 
 }
